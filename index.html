@@ -3,58 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitTracker Pro - Tu Centro de Fitness Completo</title>
+    <title>FitTracker - Aplicación de Fitness</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         .fade-in {
             animation: fadeIn 0.5s ease-in;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        .slide-in {
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        .bounce-in {
-            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .pulse-bg {
-            animation: pulseBg 3s infinite;
-        }
-        
-        @keyframes pulseBg {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 200% 200%;
-        }
-        
-        .glass-effect {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
+
         .intensity-baja { 
             background: linear-gradient(135deg, #10b981, #059669); 
             color: white;
@@ -68,553 +28,188 @@
             color: white;
         }
 
-        .floating-element {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.1;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-            100% { transform: translateY(0px) rotate(360deg); }
-        }
-
-        .progress-bar {
-            transition: width 0.5s ease-in-out;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .timer-display {
-            font-family: 'Courier New', monospace;
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .nutrition-item {
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             transition: all 0.3s ease;
         }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
 
-        .nutrition-item:hover {
-            transform: translateY(-3px);
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- Elementos flotantes decorativos -->
-    <div class="floating-element text-6xl" style="top: 10%; left: 5%;">💪</div>
-    <div class="floating-element text-4xl" style="top: 60%; right: 10%; animation-delay: -5s;">🏃</div>
-    <div class="floating-element text-5xl" style="bottom: 20%; left: 70%; animation-delay: -10s;">🔥</div>
-
+<body class="bg-gray-100 min-h-screen">
     <!-- Header -->
-    <header class="gradient-bg pulse-bg text-white shadow-2xl relative overflow-hidden">
-        <div class="container mx-auto px-4 py-6 relative z-10">
+    <header class="bg-gradient-to-r from-blue-600 to-purple-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-full">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-3xl font-bold">FitTracker Pro</h1>
-                        <p class="text-sm opacity-90">Tu centro de fitness completo</p>
+                        <h1 class="text-2xl font-bold">FitTracker</h1>
+                        <p class="text-sm opacity-90">Tu aplicación de fitness</p>
                     </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-4">
-                    <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
-                        <span class="text-sm font-medium" id="current-date"></span>
-                    </div>
-                    <button onclick="mostrarPerfil()" class="bg-white bg-opacity-20 p-2 rounded-full hover:bg-opacity-30 transition-all">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
+                <div class="text-sm" id="fecha-actual"></div>
             </div>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-8">
-        <!-- Navigation Tabs -->
-        <div class="mb-8">
-            <nav class="flex flex-wrap space-x-1 bg-white rounded-xl p-2 shadow-lg">
-                <button onclick="showSection('dashboard')" id="tab-dashboard" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg>
-                        <span class="text-sm">Dashboard</span>
-                    </div>
+        <!-- Navigation -->
+        <div class="bg-white rounded-lg shadow-md p-2 mb-8">
+            <div class="flex flex-wrap space-x-1">
+                <button onclick="mostrarSeccion('entrenamientos')" id="btn-entrenamientos" 
+                        class="flex-1 py-2 px-4 rounded-lg font-medium bg-blue-500 text-white">
+                    Entrenamientos
                 </button>
-                <button onclick="showSection('entrenamientos')" id="tab-entrenamientos" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="text-sm">Entrenamientos</span>
-                    </div>
+                <button onclick="mostrarSeccion('nutricion')" id="btn-nutricion" 
+                        class="flex-1 py-2 px-4 rounded-lg font-medium text-gray-600 hover:bg-gray-100">
+                    Nutrición
                 </button>
-                <button onclick="showSection('nutricion')" id="tab-nutricion" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="text-sm">Nutrición</span>
-                    </div>
+                <button onclick="mostrarSeccion('estadisticas')" id="btn-estadisticas" 
+                        class="flex-1 py-2 px-4 rounded-lg font-medium text-gray-600 hover:bg-gray-100">
+                    Estadísticas
                 </button>
-                <button onclick="showSection('ejercicios')" id="tab-ejercicios" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 01-1 1H8a1 1 0 110-2h2a1 1 0 011 1zm-4-3a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="text-sm">Ejercicios</span>
-                    </div>
+                <button onclick="mostrarSeccion('timer')" id="btn-timer" 
+                        class="flex-1 py-2 px-4 rounded-lg font-medium text-gray-600 hover:bg-gray-100">
+                    Timer
                 </button>
-                <button onclick="showSection('progreso')" id="tab-progreso" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="text-sm">Progreso</span>
-                    </div>
-                </button>
-                <button onclick="showSection('timer')" id="tab-timer" 
-                        class="flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100">
-                    <div class="flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="text-sm">Timer</span>
-                    </div>
-                </button>
-            </nav>
-        </div>
-
-        <!-- Dashboard Section -->
-        <div id="section-dashboard" class="section-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <!-- Estadísticas principales -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Total Minutos</h3>
-                    <p class="text-3xl font-bold text-blue-600" id="dashboard-total-minutos">0</p>
-                    <p class="text-sm text-gray-500">esta semana</p>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-green-500 to-green-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Entrenamientos</h3>
-                    <p class="text-3xl font-bold text-green-600" id="dashboard-entrenamientos">0</p>
-                    <p class="text-sm text-gray-500">completados</p>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-orange-500 to-red-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Calorías</h3>
-                    <p class="text-3xl font-bold text-orange-600" id="dashboard-calorias">0</p>
-                    <p class="text-sm text-gray-500">quemadas hoy</p>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Racha</h3>
-                    <p class="text-3xl font-bold text-purple-600" id="dashboard-racha">0</p>
-                    <p class="text-sm text-gray-500">días seguidos</p>
-                </div>
-            </div>
-
-            <!-- Gráfico de progreso -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Progreso Semanal</h3>
-                    <canvas id="grafico-progreso" class="w-full h-64"></canvas>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Actividad Reciente</h3>
-                    <div id="actividad-reciente" class="space-y-3 max-h-64 overflow-y-auto">
-                        <div class="text-center py-8 text-gray-500">
-                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                            </svg>
-                            <p>Sin actividad reciente</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Objetivos diarios -->
-            <div class="bg-white rounded-2xl shadow-xl p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-gray-800">Objetivos de Hoy</h3>
-                    <button onclick="configurarObjetivos()" class="text-blue-600 hover:text-blue-800 font-medium">
-                        Configurar
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="text-center">
-                        <div class="relative w-24 h-24 mx-auto mb-4">
-                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                <path id="progreso-ejercicio" class="text-blue-500 transition-all duration-500" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                            </svg>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-lg font-bold text-gray-800" id="porcentaje-ejercicio">0%</span>
-                            </div>
-                        </div>
-                        <h4 class="font-semibold text-gray-800">Ejercicio</h4>
-                        <p class="text-sm text-gray-500" id="meta-ejercicio">0/30 min</p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="relative w-24 h-24 mx-auto mb-4">
-                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                <path id="progreso-calorias" class="text-orange-500 transition-all duration-500" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                            </svg>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-lg font-bold text-gray-800" id="porcentaje-calorias">0%</span>
-                            </div>
-                        </div>
-                        <h4 class="font-semibold text-gray-800">Calorías</h4>
-                        <p class="text-sm text-gray-500" id="meta-calorias">0/200 kcal</p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="relative w-24 h-24 mx-auto mb-4">
-                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path class="text-gray-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                <path id="progreso-agua" class="text-blue-400 transition-all duration-500" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                            </svg>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-lg font-bold text-gray-800" id="porcentaje-agua">0%</span>
-                            </div>
-                        </div>
-                        <h4 class="font-semibold text-gray-800">Hidratación</h4>
-                        <p class="text-sm text-gray-500" id="meta-agua">0/8 vasos</p>
-                        <button onclick="agregarAgua()" class="mt-2 text-blue-500 hover:text-blue-700 text-sm font-medium">
-                            + Agregar vaso
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- Sección de Entrenamientos (mejorada) -->
-        <div id="section-entrenamientos" class="section-content hidden">
+        <!-- Sección Entrenamientos -->
+        <div id="seccion-entrenamientos" class="seccion">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Formulario mejorado -->
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-800">Nuevo Entrenamiento</h2>
-                    </div>
+                <!-- Formulario -->
+                <div class="bg-white rounded-lg shadow-md p-6 card">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        Nuevo Entrenamiento
+                    </h2>
                     
                     <div class="space-y-4">
                         <div>
-                            <label for="nombre-entrenamiento" class="block text-sm font-medium text-gray-700 mb-2">
-                                Nombre del Entrenamiento
-                            </label>
-                            <input type="text" id="nombre-entrenamiento" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                                   placeholder="Ej: Cardio matutino">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text" id="nombre" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Ej: Cardio matutino">
                         </div>
                         
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label for="duracion" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Duración (min)
-                                </label>
-                                <input type="number" id="duracion" min="1" 
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                                       placeholder="30">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Duración (min)</label>
+                                <input type="number" id="duracion" min="1" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="30">
                             </div>
                             <div>
-                                <label for="calorias-quemadas" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Calorías quemadas
-                                </label>
-                                <input type="number" id="calorias-quemadas" min="0" 
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                                       placeholder="150">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Calorías</label>
+                                <input type="number" id="calorias" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="200">
                             </div>
                         </div>
                         
                         <div>
-                            <label for="fecha" class="block text-sm font-medium text-gray-700 mb-2">
-                                Fecha
-                            </label>
-                            <input type="date" id="fecha" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+                            <input type="date" id="fecha" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         
                         <div>
-                            <label for="intensidad" class="block text-sm font-medium text-gray-700 mb-2">
-                                Nivel de Intensidad
-                            </label>
-                            <select id="intensidad" 
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Intensidad</label>
+                            <select id="intensidad" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Selecciona intensidad</option>
                                 <option value="baja">🟢 Baja</option>
                                 <option value="media">🟡 Media</option>
                                 <option value="alta">🔴 Alta</option>
                             </select>
                         </div>
-
+                        
                         <div>
-                            <label for="tipo-ejercicio" class="block text-sm font-medium text-gray-700 mb-2">
-                                Tipo de Ejercicio
-                            </label>
-                            <select id="tipo-ejercicio" 
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                            <select id="tipo" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">Selecciona tipo</option>
                                 <option value="cardio">🏃 Cardio</option>
                                 <option value="fuerza">💪 Fuerza</option>
                                 <option value="flexibilidad">🧘 Flexibilidad</option>
-                                <option value="funcional">⚡ Funcional</option>
-                                <option value="deporte">⚽ Deporte</option>
                             </select>
                         </div>
-
-                        <div>
-                            <label for="notas" class="block text-sm font-medium text-gray-700 mb-2">
-                                Notas (opcional)
-                            </label>
-                            <textarea id="notas" rows="3"
-                                      class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
-                                      placeholder="Cómo te sentiste, qué ejercicios hiciste..."></textarea>
-                        </div>
                         
-                        <button onclick="agregarEntrenamiento()" 
-                                class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                            <span class="flex items-center justify-center space-x-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Agregar Entrenamiento</span>
-                            </span>
-                        </button>
-
-                        <button onclick="iniciarEntrenamiento()" 
-                                class="w-full bg-gradient-to-r from-green-500 to-teal-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                            <span class="flex items-center justify-center space-x-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Iniciar Entrenamiento con Timer</span>
-                            </span>
+                        <button onclick="agregarEntrenamiento()" class="w-full btn-primary text-white py-3 px-6 rounded-lg font-semibold">
+                            Agregar Entrenamiento
                         </button>
                     </div>
                 </div>
 
-                <!-- Lista de entrenamientos mejorada -->
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center">
-                            <div class="bg-gradient-to-r from-green-500 to-teal-600 p-3 rounded-full mr-4">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <h2 class="text-2xl font-bold text-gray-800">Mis Entrenamientos</h2>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <select id="filtro-entrenamientos" onchange="filtrarEntrenamientos()" 
-                                    class="text-sm border border-gray-300 rounded-lg px-3 py-2">
-                                <option value="">Todos</option>
-                                <option value="cardio">Cardio</option>
-                                <option value="fuerza">Fuerza</option>
-                                <option value="flexibilidad">Flexibilidad</option>
-                                <option value="funcional">Funcional</option>
-                                <option value="deporte">Deporte</option>
-                            </select>
-                            <div class="bg-blue-100 px-3 py-1 rounded-full">
-                                <span class="text-sm font-semibold text-blue-800" id="contador-entrenamientos">0 entrenamientos</span>
-                            </div>
+                <!-- Lista de entrenamientos -->
+                <div class="bg-white rounded-lg shadow-md p-6 card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-800 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            Mis Entrenamientos
+                        </h2>
+                        <div class="bg-blue-100 px-3 py-1 rounded-full">
+                            <span class="text-sm font-semibold text-blue-800" id="contador">0 entrenamientos</span>
                         </div>
                     </div>
                     
                     <div id="lista-entrenamientos" class="space-y-3 max-h-96 overflow-y-auto">
-                        <div class="text-center py-12 text-gray-500">
-                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="text-center py-8 text-gray-500" id="mensaje-vacio">
+                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <p class="text-lg font-medium">¡No hay entrenamientos registrados!</p>
-                            <p class="text-sm">Agrega tu primer entrenamiento usando el formulario.</p>
+                            <p class="font-medium">¡No hay entrenamientos registrados!</p>
+                            <p class="text-sm">Agrega tu primer entrenamiento.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Estadísticas detalladas -->
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Total de Minutos</h3>
-                    <p class="text-3xl font-bold text-blue-600" id="total-minutos">0</p>
-                    <p class="text-sm text-gray-500">minutos entrenados</p>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-green-500 to-green-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Entrenamientos</h3>
-                    <p class="text-3xl font-bold text-green-600" id="total-entrenamientos">0</p>
-                    <p class="text-sm text-gray-500">sesiones completadas</p>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-orange-500 to-red-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Calorías Totales</h3>
-                    <p class="text-3xl font-bold text-orange-600" id="total-calorias">0</p>
-                    <p class="text-sm text-gray-500">calorías quemadas</p>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
-                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Promedio</h3>
-                    <p class="text-3xl font-bold text-purple-600" id="promedio-duracion">0</p>
-                    <p class="text-sm text-gray-500">minutos por sesión</p>
                 </div>
             </div>
         </div>
 
-        <!-- Sección de Nutrición -->
-        <div id="section-nutricion" class="section-content hidden">
+        <!-- Sección Nutrición -->
+        <div id="seccion-nutricion" class="seccion hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Registro de comidas -->
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gray-800">Registro de Comidas</h2>
-                    </div>
+                <!-- Formulario comidas -->
+                <div class="bg-white rounded-lg shadow-md p-6 card">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                        Nueva Comida
+                    </h2>
                     
                     <div class="space-y-4">
                         <div>
-                            <label for="comida" class="block text-sm font-medium text-gray-700 mb-2">
-                                Alimento
-                            </label>
-                            <input type="text" id="comida" 
-                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                   placeholder="Ej: Pollo a la plancha">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Alimento</label>
+                            <input type="text" id="alimento" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="Ej: Pollo a la plancha">
                         </div>
                         
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label for="calorias-comida" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Calorías
-                                </label>
-                                <input type="number" id="calorias-comida" min="0" 
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                       placeholder="250">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Calorías</label>
+                                <input type="number" id="calorias-comida" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="250">
                             </div>
                             <div>
-                                <label for="porcion" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Porción (g)
-                                </label>
-                                <input type="number" id="porcion" min="0" 
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                       placeholder="100">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-4">
-                            <div>
-                                <label for="proteinas" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Proteínas (g)
-                                </label>
-                                <input type="number" id="proteinas" min="0" step="0.1"
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                       placeholder="25">
-                            </div>
-                            <div>
-                                <label for="carbohidratos" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Carbohidratos (g)
-                                </label>
-                                <input type="number" id="carbohidratos" min="0" step="0.1"
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                       placeholder="10">
-                            </div>
-                            <div>
-                                <label for="grasas" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Grasas (g)
-                                </label>
-                                <input type="number" id="grasas" min="0" step="0.1"
-                                       class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300"
-                                       placeholder="5">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Porción (g)</label>
+                                <input type="number" id="porcion" min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="100">
                             </div>
                         </div>
                         
                         <div>
-                            <label for="tipo-comida" class="block text-sm font-medium text-gray-700 mb-2">
-                                Tipo de Comida
-                            </label>
-                            <select id="tipo-comida" 
-                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Comida</label>
+                            <select id="tipo-comida" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
                                 <option value="">Selecciona tipo</option>
                                 <option value="desayuno">🌅 Desayuno</option>
                                 <option value="almuerzo">☀️ Almuerzo</option>
@@ -623,285 +218,164 @@
                             </select>
                         </div>
                         
-                        <button onclick="agregarComida()" 
-                                class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                            <span class="flex items-center justify-center space-x-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Registrar Comida</span>
-                            </span>
+                        <button onclick="agregarComida()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-300">
+                            Registrar Comida
                         </button>
                     </div>
                 </div>
 
                 <!-- Lista de comidas -->
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center">
-                            <div class="bg-gradient-to-r from-orange-500 to-red-500 p-3 rounded-full mr-4">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <h2 class="text-2xl font-bold text-gray-800">Comidas de Hoy</h2>
-                        </div>
-                        <div class="bg-orange-100 px-3 py-1 rounded-full">
-                            <span class="text-sm font-semibold text-orange-800" id="contador-comidas">0 comidas</span>
+                <div class="bg-white rounded-lg shadow-md p-6 card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">Comidas de Hoy</h2>
+                        <div class="bg-green-100 px-3 py-1 rounded-full">
+                            <span class="text-sm font-semibold text-green-800" id="contador-comidas">0 comidas</span>
                         </div>
                     </div>
                     
                     <div id="lista-comidas" class="space-y-3 max-h-96 overflow-y-auto">
-                        <div class="text-center py-12 text-gray-500">
-                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                            <p class="text-lg font-medium">¡No hay comidas registradas hoy!</p>
-                            <p class="text-sm">Registra tus comidas para llevar un control nutricional.</p>
+                        <div class="text-center py-8 text-gray-500" id="mensaje-vacio-comidas">
+                            <p class="font-medium">¡No hay comidas registradas!</p>
+                            <p class="text-sm">Registra tus comidas del día.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Estadísticas -->
+        <div id="seccion-estadisticas" class="seccion hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Total Minutos</h3>
+                    <p class="text-3xl font-bold text-blue-600" id="stat-minutos">0</p>
+                    <p class="text-sm text-gray-500">minutos entrenados</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card">
+                    <div class="bg-green-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Entrenamientos</h3>
+                    <p class="text-3xl font-bold text-green-600" id="stat-entrenamientos">0</p>
+                    <p class="text-sm text-gray-500">sesiones completadas</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card">
+                    <div class="bg-orange-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Calorías</h3>
+                    <p class="text-3xl font-bold text-orange-600" id="stat-calorias">0</p>
+                    <p class="text-sm text-gray-500">calorías quemadas</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Promedio</h3>
+                    <p class="text-3xl font-bold text-purple-600" id="stat-promedio">0</p>
+                    <p class="text-sm text-gray-500">min por sesión</p>
                 </div>
             </div>
 
             <!-- Resumen nutricional -->
-            <div class="mt-8 bg-white rounded-2xl shadow-xl p-6">
-                <h3 class="text-xl font-bold text-gray-800 mb-6">Resumen Nutricional del Día</h3>
+            <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Resumen Nutricional</h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="text-center">
-                        <div class="bg-gradient-to-r from-red-500 to-pink-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clip-rule="evenodd"></path>
-                            </svg>
+                        <div class="bg-red-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">🔥</span>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Calorías Totales</h3>
-                        <p class="text-3xl font-bold text-red-600" id="total-calorias-comida">0</p>
-                        <p class="text-sm text-gray-500">kcal consumidas</p>
+                        <h4 class="font-semibold text-gray-800">Calorías Consumidas</h4>
+                        <p class="text-2xl font-bold text-red-600" id="total-calorias-consumidas">0</p>
                     </div>
-
                     <div class="text-center">
-                        <div class="bg-gradient-to-r from-blue-500 to-indigo-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">P</span>
+                        <div class="bg-green-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">🥩</span>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Proteínas</h3>
-                        <p class="text-3xl font-bold text-blue-600" id="total-proteinas">0</p>
-                        <p class="text-sm text-gray-500">gramos</p>
+                        <h4 class="font-semibold text-gray-800">Balance Calórico</h4>
+                        <p class="text-2xl font-bold text-green-600" id="balance-calorico">0</p>
                     </div>
-
                     <div class="text-center">
-                        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">C</span>
+                        <div class="bg-blue-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">💧</span>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Carbohidratos</h3>
-                        <p class="text-3xl font-bold text-yellow-600" id="total-carbohidratos">0</p>
-                        <p class="text-sm text-gray-500">gramos</p>
+                        <h4 class="font-semibold text-gray-800">Hidratación</h4>
+                        <div class="flex items-center justify-center space-x-2 mt-2">
+                            <button onclick="agregarVaso()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">+ Vaso</button>
+                            <span class="text-2xl font-bold text-blue-600" id="vasos-agua">0</span>
+                        </div>
                     </div>
-
                     <div class="text-center">
-                        <div class="bg-gradient-to-r from-green-500 to-teal-500 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">G</span>
+                        <div class="bg-yellow-100 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">⚡</span>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Grasas</h3>
-                        <p class="text-3xl font-bold text-green-600" id="total-grasas">0</p>
-                        <p class="text-sm text-gray-500">gramos</p>
+                        <h4 class="font-semibold text-gray-800">Comidas Hoy</h4>
+                        <p class="text-2xl font-bold text-yellow-600" id="total-comidas-hoy">0</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Sección de Ejercicios -->
-        <div id="section-ejercicios" class="section-content hidden">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <div class="bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl shadow-xl p-6 text-white">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold">Cardio</h3>
-                    </div>
-                    <p class="text-white opacity-90 mb-4">Ejercicios cardiovasculares para quemar calorías</p>
-                    <button onclick="mostrarEjercicios('cardio')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg font-medium transition-all duration-300">
-                        Ver Ejercicios
-                    </button>
-                </div>
-
-                <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-xl p-6 text-white">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold">Fuerza</h3>
-                    </div>
-                    <p class="text-white opacity-90 mb-4">Ejercicios para desarrollar masa muscular</p>
-                    <button onclick="mostrarEjercicios('fuerza')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg font-medium transition-all duration-300">
-                        Ver Ejercicios
-                    </button>
-                </div>
-
-                <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl shadow-xl p-6 text-white">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-white bg-opacity-20 p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M9.663 17h4.673a1.001 1.001 0 00.728-1.683l-.026-.027-1.97-2.1a1.01 1.01 0 00-.2-.196 7 7 0 10-9.726 0 1.01 1.01 0 00-.2.196l-1.97 2.1-.026.027A1.001 1.001 0 001.663 17h4.673z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold">Flexibilidad</h3>
-                    </div>
-                    <p class="text-white opacity-90 mb-4">Estiramientos y movilidad</p>
-                    <button onclick="mostrarEjercicios('flexibilidad')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg font-medium transition-all duration-300">
-                        Ver Ejercicios
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-xl p-6" id="lista-ejercicios-categoria">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6">Biblioteca de Ejercicios</h3>
-                <p class="text-gray-600 mb-4">Selecciona una categoría arriba para ver los ejercicios disponibles.</p>
-                <div id="ejercicios-contenido" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Los ejercicios se cargarán dinámicamente aquí -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección de Progreso -->
-        <div id="section-progreso" class="section-content hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Progreso de Entrenamientos</h3>
-                    <canvas id="grafico-entrenamientos" class="w-full h-64"></canvas>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Distribución por Intensidad</h3>
-                    <canvas id="grafico-intensidad" class="w-full h-64"></canvas>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Calorías por Día</h3>
-                    <canvas id="grafico-calorias" class="w-full h-64"></canvas>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Logros Recientes</h3>
-                    <div id="lista-logros" class="space-y-3">
-                        <div class="flex items-center p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                            <div class="flex-shrink-0 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
-                                <span class="text-white text-xl">🏆</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">Primera Semana Completa</p>
-                                <p class="text-sm text-gray-600">Completaste 7 días seguidos de ejercicio</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección de Timer -->
-        <div id="section-timer" class="section-content hidden">
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-8">Timer de Entrenamiento</h2>
+        <!-- Sección Timer -->
+        <div id="seccion-timer" class="seccion hidden">
+            <div class="max-w-md mx-auto">
+                <div class="bg-white rounded-lg shadow-md p-8 text-center card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Timer de Entrenamiento</h2>
                     
-                    <div class="relative w-64 h-64 mx-auto mb-8">
-                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"></circle>
-                            <circle id="timer-circle" cx="50" cy="50" r="45" fill="none" stroke="#3b82f6" 
-                                    stroke-width="8" stroke-linecap="round" 
-                                    stroke-dasharray="283" stroke-dashoffset="283"
-                                    class="transition-all duration-1000 ease-linear"></circle>
-                        </svg>
+                    <div class="relative w-48 h-48 mx-auto mb-8">
+                        <div class="absolute inset-0 rounded-full border-8 border-gray-200"></div>
+                        <div class="absolute inset-0 rounded-full border-8 border-blue-500 border-t-transparent transition-transform duration-1000" 
+                             id="timer-progress" style="transform: rotate(0deg);"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="timer-display text-4xl font-bold text-gray-800" id="timer-display">00:00</div>
-                                <p class="text-sm text-gray-600 mt-2" id="timer-status">Listo para comenzar</p>
+                            <div>
+                                <div class="text-4xl font-bold text-gray-800" id="timer-display">00:00</div>
+                                <p class="text-sm text-gray-600" id="timer-status">Listo</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-4 mb-8">
-                        <button onclick="setTimer(300)" class="bg-blue-100 hover:bg-blue-200 text-blue-800 py-3 px-4 rounded-lg font-semibold transition-all duration-300">
-                            5 min
-                        </button>
-                        <button onclick="setTimer(900)" class="bg-green-100 hover:bg-green-200 text-green-800 py-3 px-4 rounded-lg font-semibold transition-all duration-300">
-                            15 min
-                        </button>
-                        <button onclick="setTimer(1800)" class="bg-purple-100 hover:bg-purple-200 text-purple-800 py-3 px-4 rounded-lg font-semibold transition-all duration-300">
-                            30 min
-                        </button>
+                    <div class="grid grid-cols-3 gap-2 mb-6">
+                        <button onclick="configurarTimer(300)" class="bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-3 rounded font-medium">5 min</button>
+                        <button onclick="configurarTimer(900)" class="bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded font-medium">15 min</button>
+                        <button onclick="configurarTimer(1800)" class="bg-purple-100 hover:bg-purple-200 text-purple-800 py-2 px-3 rounded font-medium">30 min</button>
                     </div>
 
-                    <div class="flex justify-center space-x-4 mb-8">
-                        <button id="timer-start" onclick="startTimer()" 
-                                class="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <div class="flex justify-center space-x-3 mb-6">
+                        <button id="btn-iniciar" onclick="iniciarTimer()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-lg font-medium">
                             ▶ Iniciar
                         </button>
-                        <button id="timer-pause" onclick="pauseTimer()" 
-                                class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hidden">
+                        <button id="btn-pausar" onclick="pausarTimer()" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-lg font-medium hidden">
                             ⏸ Pausar
                         </button>
-                        <button onclick="stopTimer()" 
-                                class="bg-gradient-to-r from-red-500 to-pink-600 text-white py-3 px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                        <button onclick="detenerTimer()" class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg font-medium">
                             ⏹ Detener
                         </button>
                     </div>
 
-                    <div class="bg-gray-50 rounded-xl p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Timer Personalizado</h4>
-                        <div class="flex items-center justify-center space-x-4">
-                            <input type="number" id="custom-minutes" min="1" max="60" placeholder="Minutos" 
-                                   class="w-24 px-3 py-2 border border-gray-300 rounded-lg text-center">
-                            <span class="text-gray-600">:</span>
-                            <input type="number" id="custom-seconds" min="0" max="59" placeholder="Seg" 
-                                   class="w-24 px-3 py-2 border border-gray-300 rounded-lg text-center">
-                            <button onclick="setCustomTimer()" 
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300">
-                                Configurar
-                            </button>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-medium text-gray-800 mb-3">Timer Personalizado</h4>
+                        <div class="flex items-center justify-center space-x-2">
+                            <input type="number" id="minutos-custom" min="1" max="60" placeholder="Min" class="w-16 px-2 py-1 border border-gray-300 rounded text-center">
+                            <span>:</span>
+                            <input type="number" id="segundos-custom" min="0" max="59" placeholder="Seg" class="w-16 px-2 py-1 border border-gray-300 rounded text-center">
+                            <button onclick="configurarTimerCustom()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">OK</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Perfil -->
-    <div id="modal-perfil" class="modal">
-        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-bold text-gray-800">Mi Perfil</h3>
-                <button onclick="cerrarModal('modal-perfil')" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                    <input type="text" id="perfil-nombre" value="Usuario Fitness" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Objetivo Diario (minutos)</label>
-                    <input type="number" id="perfil-objetivo" value="30" min="1" max="300"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Peso (kg)</label>
-                    <input type="number" id="perfil-peso" value="70" min="30" max="200" step="0.1"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <button onclick="guardarPerfil()" 
-                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                    Guardar Cambios
-                </button>
             </div>
         </div>
     </div>
@@ -912,441 +386,188 @@
         let comidas = [];
         let contadorId = 1;
         let contadorComidas = 1;
-        let timerInterval = null;
-        let timerSeconds = 0;
-        let timerDuration = 0;
-        let timerPaused = false;
         let vasosAgua = 0;
-        let objetivos = {
-            ejercicio: 30,
-            calorias: 200,
-            agua: 8
-        };
+        
+        // Variables del timer
+        let timerInterval = null;
+        let timerSegundos = 0;
+        let timerDuracion = 0;
+        let timerPausado = false;
 
-        // Base de datos de ejercicios
-        const ejerciciosDB = {
-            cardio: [
-                { nombre: 'Correr', descripcion: '30 min de carrera continua', calorias: 300, duracion: 30 },
-                { nombre: 'Bicicleta', descripcion: '45 min de ciclismo', calorias: 400, duracion: 45 },
-                { nombre: 'Saltar cuerda', descripcion: '15 min de salto continuo', calorias: 200, duracion: 15 },
-                { nombre: 'Natación', descripcion: '30 min de nado libre', calorias: 350, duracion: 30 },
-                { nombre: 'HIIT', descripcion: '20 min de alta intensidad', calorias: 250, duracion: 20 },
-                { nombre: 'Elíptica', descripcion: '40 min en máquina elíptica', calorias: 320, duracion: 40 }
-            ],
-            fuerza: [
-                { nombre: 'Push-ups', descripcion: '3 series de 15 repeticiones', calorias: 50, duracion: 10 },
-                { nombre: 'Squats', descripcion: '4 series de 20 repeticiones', calorias: 80, duracion: 15 },
-                { nombre: 'Pull-ups', descripcion: '3 series de 8 repeticiones', calorias: 60, duracion: 12 },
-                { nombre: 'Plancha', descripcion: '3 series de 60 segundos', calorias: 40, duracion: 8 },
-                { nombre: 'Deadlifts', descripcion: '4 series de 12 repeticiones', calorias: 100, duracion: 20 },
-                { nombre: 'Burpees', descripcion: '3 series de 10 repeticiones', calorias: 120, duracion: 15 }
-            ],
-            flexibilidad: [
-                { nombre: 'Yoga básico', descripcion: '30 min de posturas básicas', calorias: 120, duracion: 30 },
-                { nombre: 'Estiramiento completo', descripcion: '20 min de estiramientos', calorias: 60, duracion: 20 },
-                { nombre: 'Pilates', descripcion: '45 min de ejercicios pilates', calorias: 180, duracion: 45 },
-                { nombre: 'Meditación activa', descripcion: '15 min de relajación', calorias: 30, duracion: 15 },
-                { nombre: 'Tai Chi', descripcion: '25 min de movimientos suaves', calorias: 90, duracion: 25 },
-                { nombre: 'Foam rolling', descripcion: '10 min de auto-masaje', calorias: 20, duracion: 10 }
-            ]
-        };
-
-        // Inicializar la aplicación
+        // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
+            // Establecer fecha actual
             const hoy = new Date().toISOString().split('T')[0];
             document.getElementById('fecha').value = hoy;
             
+            // Mostrar fecha en header
             const fechaActual = new Date().toLocaleDateString('es-ES', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
-            document.getElementById('current-date').textContent = fechaActual;
+            document.getElementById('fecha-actual').textContent = fechaActual;
             
-            actualizarTodosLosDatos();
-            inicializarGraficos();
+            actualizarEstadisticas();
         });
 
-        // Función para cambiar entre secciones
-        function showSection(seccionId) {
-            const secciones = document.querySelectorAll('.section-content');
-            secciones.forEach(seccion => seccion.classList.add('hidden'));
+        // Navegación entre secciones
+        function mostrarSeccion(seccion) {
+            // Ocultar todas las secciones
+            const secciones = document.querySelectorAll('.seccion');
+            secciones.forEach(sec => sec.classList.add('hidden'));
             
-            document.getElementById('section-' + seccionId).classList.remove('hidden');
-            document.getElementById('section-' + seccionId).classList.add('fade-in');
+            // Mostrar sección seleccionada
+            document.getElementById('seccion-' + seccion).classList.remove('hidden');
             
-            const tabs = document.querySelectorAll('[id^="tab-"]');
-            tabs.forEach(tab => {
-                tab.className = 'flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 text-gray-600 hover:text-gray-800 hover:bg-gray-100';
+            // Actualizar botones de navegación
+            const botones = document.querySelectorAll('[id^="btn-"]');
+            botones.forEach(btn => {
+                if (btn.id.includes(seccion)) {
+                    btn.className = 'flex-1 py-2 px-4 rounded-lg font-medium bg-blue-500 text-white';
+                } else {
+                    btn.className = 'flex-1 py-2 px-4 rounded-lg font-medium text-gray-600 hover:bg-gray-100';
+                }
             });
-            
-            document.getElementById('tab-' + seccionId).className = 'flex-1 min-w-fit py-3 px-3 rounded-lg font-medium transition-all duration-300 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md';
         }
 
-        // Función para agregar entrenamiento (mejorada)
+        // Función para agregar entrenamiento
         function agregarEntrenamiento() {
-            const nombre = document.getElementById('nombre-entrenamiento').value.trim();
+            const nombre = document.getElementById('nombre').value.trim();
             const duracion = parseInt(document.getElementById('duracion').value);
-            const caloriasQuemadas = parseInt(document.getElementById('calorias-quemadas').value) || 0;
+            const calorias = parseInt(document.getElementById('calorias').value) || 0;
             const fecha = document.getElementById('fecha').value;
             const intensidad = document.getElementById('intensidad').value;
-            const tipoEjercicio = document.getElementById('tipo-ejercicio').value;
-            const notas = document.getElementById('notas').value.trim();
+            const tipo = document.getElementById('tipo').value;
 
-            if (!nombre || !duracion || !fecha || !intensidad || !tipoEjercicio) {
-                mostrarNotificacion('Por favor, completa todos los campos obligatorios', 'error');
+            // Validaciones básicas
+            if (!nombre || !duracion || !fecha || !intensidad || !tipo) {
+                alert('Por favor, completa todos los campos obligatorios');
                 return;
             }
 
+            if (duracion <= 0) {
+                alert('La duración debe ser mayor a 0');
+                return;
+            }
+
+            // Crear nuevo entrenamiento
             const nuevoEntrenamiento = {
                 id: contadorId++,
                 nombre: nombre,
                 duracion: duracion,
-                calorias: caloriasQuemadas,
+                calorias: calorias,
                 fecha: fecha,
                 intensidad: intensidad,
-                tipo: tipoEjercicio,
-                notas: notas,
+                tipo: tipo,
                 fechaCreacion: new Date()
             };
 
+            // Agregar al array
             entrenamientos.push(nuevoEntrenamiento);
+
+            // Limpiar formulario
             limpiarFormulario();
+
+            // Actualizar vista
             renderizarEntrenamientos();
-            actualizarTodosLosDatos();
-            mostrarNotificacion('¡Entrenamiento agregado exitosamente!', 'success');
+            actualizarEstadisticas();
+
+            // Mostrar confirmación
+            mostrarMensaje('¡Entrenamiento agregado exitosamente!', 'success');
         }
 
         // Función para agregar comida
         function agregarComida() {
-            const comida = document.getElementById('comida').value.trim();
+            const alimento = document.getElementById('alimento').value.trim();
             const calorias = parseInt(document.getElementById('calorias-comida').value);
             const porcion = parseInt(document.getElementById('porcion').value);
-            const proteinas = parseFloat(document.getElementById('proteinas').value) || 0;
-            const carbohidratos = parseFloat(document.getElementById('carbohidratos').value) || 0;
-            const grasas = parseFloat(document.getElementById('grasas').value) || 0;
             const tipo = document.getElementById('tipo-comida').value;
 
-            if (!comida || !calorias || !porcion || !tipo) {
-                mostrarNotificacion('Por favor, completa todos los campos obligatorios', 'error');
+            // Validaciones
+            if (!alimento || !calorias || !porcion || !tipo) {
+                alert('Por favor, completa todos los campos');
                 return;
             }
 
+            if (calorias <= 0 || porcion <= 0) {
+                alert('Las calorías y porción deben ser mayores a 0');
+                return;
+            }
+
+            // Crear nueva comida
             const nuevaComida = {
                 id: contadorComidas++,
-                nombre: comida,
+                nombre: alimento,
                 calorias: calorias,
                 porcion: porcion,
-                proteinas: proteinas,
-                carbohidratos: carbohidratos,
-                grasas: grasas,
                 tipo: tipo,
                 fecha: new Date().toISOString().split('T')[0],
                 hora: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
             };
 
+            // Agregar al array
             comidas.push(nuevaComida);
+
+            // Limpiar formulario
             limpiarFormularioComida();
+
+            // Actualizar vista
             renderizarComidas();
-            actualizarResumenNutricional();
-            actualizarTodosLosDatos();
-            mostrarNotificacion('¡Comida registrada exitosamente!', 'success');
+            actualizarEstadisticas();
+
+            // Mostrar confirmación
+            mostrarMensaje('¡Comida registrada exitosamente!', 'success');
         }
 
-        // Funciones del timer
-        function setTimer(seconds) {
-            timerSeconds = seconds;
-            timerDuration = seconds;
-            updateTimerDisplay();
-            updateTimerCircle();
-            document.getElementById('timer-status').textContent = `Configurado para ${Math.floor(seconds/60)}:${(seconds%60).toString().padStart(2, '0')}`;
-        }
-
-        function setCustomTimer() {
-            const minutes = parseInt(document.getElementById('custom-minutes').value) || 0;
-            const seconds = parseInt(document.getElementById('custom-seconds').value) || 0;
-            const totalSeconds = minutes * 60 + seconds;
-            
-            if (totalSeconds > 0) {
-                setTimer(totalSeconds);
-                document.getElementById('custom-minutes').value = '';
-                document.getElementById('custom-seconds').value = '';
-            }
-        }
-
-        function startTimer() {
-            if (timerSeconds <= 0) {
-                mostrarNotificacion('Configura un tiempo primero', 'error');
-                return;
-            }
-
-            if (timerPaused) {
-                timerPaused = false;
-            }
-
-            document.getElementById('timer-start').classList.add('hidden');
-            document.getElementById('timer-pause').classList.remove('hidden');
-            document.getElementById('timer-status').textContent = 'En progreso...';
-
-            timerInterval = setInterval(() => {
-                if (!timerPaused) {
-                    timerSeconds--;
-                    updateTimerDisplay();
-                    updateTimerCircle();
-
-                    if (timerSeconds <= 0) {
-                        clearInterval(timerInterval);
-                        document.getElementById('timer-start').classList.remove('hidden');
-                        document.getElementById('timer-pause').classList.add('hidden');
-                        document.getElementById('timer-status').textContent = '¡Tiempo completado!';
-                        mostrarNotificacion('¡Timer completado! 🎉', 'success');
-                        
-                        // Reproducir sonido de notificación (simulado con vibración si está disponible)
-                        if (navigator.vibrate) {
-                            navigator.vibrate([200, 100, 200]);
-                        }
-                    }
-                }
-            }, 1000);
-        }
-
-        function pauseTimer() {
-            timerPaused = true;
-            document.getElementById('timer-start').classList.remove('hidden');
-            document.getElementById('timer-pause').classList.add('hidden');
-            document.getElementById('timer-status').textContent = 'Pausado';
-        }
-
-        function stopTimer() {
-            clearInterval(timerInterval);
-            timerSeconds = 0;
-            timerDuration = 0;
-            timerPaused = false;
-            document.getElementById('timer-start').classList.remove('hidden');
-            document.getElementById('timer-pause').classList.add('hidden');
-            document.getElementById('timer-status').textContent = 'Listo para comenzar';
-            updateTimerDisplay();
-            updateTimerCircle();
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timerSeconds / 60);
-            const seconds = timerSeconds % 60;
-            document.getElementById('timer-display').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function updateTimerCircle() {
-            if (timerDuration > 0) {
-                const progress = (timerDuration - timerSeconds) / timerDuration;
-                const circumference = 283;
-                const offset = circumference - (progress * circumference);
-                document.getElementById('timer-circle').style.strokeDashoffset = offset;
-            }
-        }
-
-        // Función para mostrar ejercicios por categoría
-        function mostrarEjercicios(categoria) {
-            const ejercicios = ejerciciosDB[categoria] || [];
-            const contenido = document.getElementById('ejercicios-contenido');
-            
-            if (ejercicios.length === 0) {
-                contenido.innerHTML = '<p class="text-gray-500 text-center col-span-full">No hay ejercicios disponibles en esta categoría.</p>';
-                return;
-            }
-
-            contenido.innerHTML = ejercicios.map(ejercicio => `
-                <div class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-all duration-300">
-                    <h4 class="font-semibold text-gray-800 mb-2">${ejercicio.nombre}</h4>
-                    <p class="text-sm text-gray-600 mb-3">${ejercicio.descripcion}</p>
-                    <div class="flex items-center justify-between text-xs text-gray-500">
-                        <span>⏱ ${ejercicio.duracion} min</span>
-                        <span>🔥 ${ejercicio.calorias} kcal</span>
-                    </div>
-                    <button onclick="agregarEjercicioRapido('${ejercicio.nombre}', ${ejercicio.duracion}, ${ejercicio.calorias}, '${categoria}')" 
-                            class="w-full mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300">
-                        Agregar a Entrenamientos
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function agregarEjercicioRapido(nombre, duracion, calorias, tipo) {
-            const nuevoEntrenamiento = {
-                id: contadorId++,
-                nombre: nombre,
-                duracion: duracion,
-                calorias: calorias,
-                fecha: new Date().toISOString().split('T')[0],
-                intensidad: 'media',
-                tipo: tipo,
-                notas: 'Agregado desde biblioteca de ejercicios',
-                fechaCreacion: new Date()
-            };
-
-            entrenamientos.push(nuevoEntrenamiento);
-            actualizarTodosLosDatos();
-            mostrarNotificacion(`${nombre} agregado a tus entrenamientos!`, 'success');
-        }
-
-        // Función para inicializar gráficos
-        function inicializarGraficos() {
-            // Gráfico de progreso semanal
-            const ctxProgreso = document.getElementById('grafico-progreso');
-            if (ctxProgreso) {
-                new Chart(ctxProgreso, {
-                    type: 'line',
-                    data: {
-                        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
-                        datasets: [{
-                            label: 'Minutos de ejercicio',
-                            data: [0, 0, 0, 0, 0, 0, 0],
-                            borderColor: 'rgb(59, 130, 246)',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Gráfico de intensidad
-            const ctxIntensidad = document.getElementById('grafico-intensidad');
-            if (ctxIntensidad) {
-                new Chart(ctxIntensidad, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Baja', 'Media', 'Alta'],
-                        datasets: [{
-                            data: [0, 0, 0],
-                            backgroundColor: [
-                                'rgb(34, 197, 94)',
-                                'rgb(245, 158, 11)',
-                                'rgb(239, 68, 68)'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        // Funciones de utilidad
-        function limpiarFormulario() {
-            document.getElementById('nombre-entrenamiento').value = '';
-            document.getElementById('duracion').value = '';
-            document.getElementById('calorias-quemadas').value = '';
-            document.getElementById('intensidad').value = '';
-            document.getElementById('tipo-ejercicio').value = '';
-            document.getElementById('notas').value = '';
-            const hoy = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha').value = hoy;
-        }
-
-        function limpiarFormularioComida() {
-            document.getElementById('comida').value = '';
-            document.getElementById('calorias-comida').value = '';
-            document.getElementById('porcion').value = '';
-            document.getElementById('proteinas').value = '';
-            document.getElementById('carbohidratos').value = '';
-            document.getElementById('grasas').value = '';
-            document.getElementById('tipo-comida').value = '';
-        }
-
+        // Función para renderizar entrenamientos
         function renderizarEntrenamientos() {
-            const listaContainer = document.getElementById('lista-entrenamientos');
-            const filtro = document.getElementById('filtro-entrenamientos').value;
-            
-            let entrenamientosFiltrados = entrenamientos;
-            if (filtro) {
-                entrenamientosFiltrados = entrenamientos.filter(ent => ent.tipo === filtro);
-            }
-            
-            if (entrenamientosFiltrados.length === 0) {
-                listaContainer.innerHTML = `
-                    <div class="text-center py-12 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="text-lg font-medium">¡No hay entrenamientos ${filtro ? 'de este tipo' : 'registrados'}!</p>
-                        <p class="text-sm">Agrega entrenamientos usando el formulario.</p>
-                    </div>
-                `;
+            const lista = document.getElementById('lista-entrenamientos');
+            const contador = document.getElementById('contador');
+            const mensajeVacio = document.getElementById('mensaje-vacio');
+
+            if (entrenamientos.length === 0) {
+                mensajeVacio.style.display = 'block';
+                contador.textContent = '0 entrenamientos';
                 return;
             }
 
-            const entrenamientosOrdenados = [...entrenamientosFiltrados].sort((a, b) => 
+            mensajeVacio.style.display = 'none';
+            contador.textContent = entrenamientos.length === 1 ? '1 entrenamiento' : entrenamientos.length + ' entrenamientos';
+
+            // Ordenar por fecha más reciente
+            const entrenamientosOrdenados = [...entrenamientos].sort((a, b) => 
                 new Date(b.fecha) - new Date(a.fecha)
             );
 
-            listaContainer.innerHTML = entrenamientosOrdenados.map(entrenamiento => {
+            lista.innerHTML = entrenamientosOrdenados.map(ent => {
                 const tipoEmoji = {
                     'cardio': '🏃',
                     'fuerza': '💪',
-                    'flexibilidad': '🧘',
-                    'funcional': '⚡',
-                    'deporte': '⚽'
-                }[entrenamiento.tipo] || '🏋️';
+                    'flexibilidad': '🧘'
+                }[ent.tipo] || '🏋️';
 
                 return `
-                    <div class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-all duration-300 slide-in">
+                    <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-all duration-300">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-3 mb-2">
-                                    <span class="text-2xl">${tipoEmoji}</span>
-                                    <h3 class="font-semibold text-gray-800 text-lg">${entrenamiento.nombre}</h3>
-                                    <span class="px-3 py-1 rounded-full text-xs font-medium intensity-${entrenamiento.intensidad}">
-                                        ${entrenamiento.intensidad.toUpperCase()}
+                                    <span class="text-xl">${tipoEmoji}</span>
+                                    <h3 class="font-semibold text-gray-800">${ent.nombre}</h3>
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium intensity-${ent.intensidad}">
+                                        ${ent.intensidad.toUpperCase()}
                                     </span>
                                 </div>
-                                <div class="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                                    <div class="flex items-center space-x-1">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        <span><strong>${entrenamiento.duracion}</strong> min</span>
-                                    </div>
-                                    <div class="flex items-center space-x-1">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        <span><strong>${entrenamiento.calorias}</strong> kcal</span>
-                                    </div>
-                                    <div class="flex items-center space-x-1">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        <span>${formatearFecha(entrenamiento.fecha)}</span>
-                                    </div>
+                                <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                    <span>⏱ ${ent.duracion} min</span>
+                                    <span>🔥 ${ent.calorias} kcal</span>
+                                    <span>📅 ${formatearFecha(ent.fecha)}</span>
                                 </div>
-                                ${entrenamiento.notas ? `<p class="text-xs text-gray-500 italic">"${entrenamiento.notas}"</p>` : ''}
                             </div>
-                            <button onclick="eliminarEntrenamiento(${entrenamiento.id})" 
-                                    class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-all duration-300 hover:scale-105 ml-4">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <button onclick="eliminarEntrenamiento(${ent.id})" 
+                                    class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-all duration-300 ml-4">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path>
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
                                 </svg>
@@ -1357,25 +578,25 @@
             }).join('');
         }
 
+        // Función para renderizar comidas
         function renderizarComidas() {
-            const listaContainer = document.getElementById('lista-comidas');
+            const lista = document.getElementById('lista-comidas');
+            const contador = document.getElementById('contador-comidas');
+            const mensajeVacio = document.getElementById('mensaje-vacio-comidas');
+            
             const hoy = new Date().toISOString().split('T')[0];
             const comidasHoy = comidas.filter(comida => comida.fecha === hoy);
-            
+
             if (comidasHoy.length === 0) {
-                listaContainer.innerHTML = `
-                    <div class="text-center py-12 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="text-lg font-medium">¡No hay comidas registradas hoy!</p>
-                        <p class="text-sm">Registra tus comidas para llevar un control nutricional.</p>
-                    </div>
-                `;
+                mensajeVacio.style.display = 'block';
+                contador.textContent = '0 comidas';
                 return;
             }
 
-            listaContainer.innerHTML = comidasHoy.map(comida => {
+            mensajeVacio.style.display = 'none';
+            contador.textContent = comidasHoy.length === 1 ? '1 comida' : comidasHoy.length + ' comidas';
+
+            lista.innerHTML = comidasHoy.map(comida => {
                 const tipoEmoji = {
                     'desayuno': '🌅',
                     'almuerzo': '☀️',
@@ -1384,28 +605,26 @@
                 }[comida.tipo] || '🍽️';
 
                 return `
-                    <div class="nutrition-item bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-all duration-300">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-3 mb-2">
-                                    <span class="text-2xl">${tipoEmoji}</span>
+                                    <span class="text-xl">${tipoEmoji}</span>
                                     <h3 class="font-semibold text-gray-800">${comida.nombre}</h3>
                                     <span class="text-xs text-gray-500">${comida.hora}</span>
                                 </div>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-600">
-                                    <div>🔥 ${comida.calorias} kcal</div>
-                                    <div>⚖️ ${comida.porcion}g</div>
-                                    <div>P: ${comida.proteinas}g</div>
-                                    <div>C: ${comida.carbohidratos}g | G: ${comida.grasas}g</div>
+                                <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                    <span>🔥 ${comida.calorias} kcal</span>
+                                    <span>⚖️ ${comida.porcion}g</span>
                                 </div>
                             </div>
                             <button onclick="eliminarComida(${comida.id})" 
-                                    class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-all duration-300 hover:scale-105 ml-4">
+                                    class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-all duration-300 ml-4">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path>
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1419,8 +638,8 @@
                 if (indice !== -1) {
                     entrenamientos.splice(indice, 1);
                     renderizarEntrenamientos();
-                    actualizarTodosLosDatos();
-                    mostrarNotificacion('Entrenamiento eliminado correctamente', 'info');
+                    actualizarEstadisticas();
+                    mostrarMensaje('Entrenamiento eliminado', 'info');
                 }
             }
         }
@@ -1431,201 +650,253 @@
                 if (indice !== -1) {
                     comidas.splice(indice, 1);
                     renderizarComidas();
-                    actualizarResumenNutricional();
-                    actualizarTodosLosDatos();
-                    mostrarNotificacion('Comida eliminada correctamente', 'info');
+                    actualizarEstadisticas();
+                    mostrarMensaje('Comida eliminada', 'info');
                 }
             }
         }
 
-        // Función para filtrar entrenamientos
-        function filtrarEntrenamientos() {
-            renderizarEntrenamientos();
-            actualizarContadorEntrenamientos();
+        // Funciones del timer
+        function configurarTimer(segundos) {
+            timerSegundos = segundos;
+            timerDuracion = segundos;
+            actualizarDisplayTimer();
+            document.getElementById('timer-status').textContent = `${Math.floor(segundos/60)}:${(segundos%60).toString().padStart(2, '0')} configurado`;
         }
 
-        // Funciones de actualización de datos
-        function actualizarTodosLosDatos() {
-            actualizarEstadisticasEntrenamientos();
-            actualizarContadorEntrenamientos();
-            actualizarContadorComidas();
-            actualizarDashboard();
-            actualizarObjetivosDiarios();
-            actualizarActividadReciente();
-        }
-
-        function actualizarEstadisticasEntrenamientos() {
-            const totalMinutos = entrenamientos.reduce((sum, ent) => sum + ent.duracion, 0);
-            const totalEntrenamientos = entrenamientos.length;
-            const totalCalorias = entrenamientos.reduce((sum, ent) => sum + (ent.calorias || 0), 0);
-            const promedio = totalEntrenamientos > 0 ? Math.round(totalMinutos / totalEntrenamientos) : 0;
-
-            document.getElementById('total-minutos').textContent = totalMinutos;
-            document.getElementById('total-entrenamientos').textContent = totalEntrenamientos;
-            document.getElementById('total-calorias').textContent = totalCalorias;
-            document.getElementById('promedio-duracion').textContent = promedio;
-        }
-
-        function actualizarContadorEntrenamientos() {
-            const filtro = document.getElementById('filtro-entrenamientos')?.value || '';
-            let entrenamientosFiltrados = entrenamientos;
-            if (filtro) {
-                entrenamientosFiltrados = entrenamientos.filter(ent => ent.tipo === filtro);
-            }
+        function configurarTimerCustom() {
+            const minutos = parseInt(document.getElementById('minutos-custom').value) || 0;
+            const segundos = parseInt(document.getElementById('segundos-custom').value) || 0;
+            const totalSegundos = minutos * 60 + segundos;
             
-            const contador = entrenamientosFiltrados.length;
-            const contadorTexto = contador === 1 ? '1 entrenamiento' : `${contador} entrenamientos`;
-            const contadorElement = document.getElementById('contador-entrenamientos');
-            if (contadorElement) {
-                contadorElement.textContent = contadorTexto;
+            if (totalSegundos > 0) {
+                configurarTimer(totalSegundos);
+                document.getElementById('minutos-custom').value = '';
+                document.getElementById('segundos-custom').value = '';
             }
         }
 
-        function actualizarContadorComidas() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const comidasHoy = comidas.filter(comida => comida.fecha === hoy);
-            const contador = comidasHoy.length;
-            const contadorTexto = contador === 1 ? '1 comida' : `${contador} comidas`;
-            const contadorElement = document.getElementById('contador-comidas');
-            if (contadorElement) {
-                contadorElement.textContent = contadorTexto;
-            }
-        }
-
-        function actualizarResumenNutricional() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const comidasHoy = comidas.filter(comida => comida.fecha === hoy);
-            
-            const totalCalorias = comidasHoy.reduce((sum, comida) => sum + comida.calorias, 0);
-            const totalProteinas = comidasHoy.reduce((sum, comida) => sum + comida.proteinas, 0);
-            const totalCarbohidratos = comidasHoy.reduce((sum, comida) => sum + comida.carbohidratos, 0);
-            const totalGrasas = comidasHoy.reduce((sum, comida) => sum + comida.grasas, 0);
-
-            document.getElementById('total-calorias-comida').textContent = totalCalorias;
-            document.getElementById('total-proteinas').textContent = Math.round(totalProteinas * 10) / 10;
-            document.getElementById('total-carbohidratos').textContent = Math.round(totalCarbohidratos * 10) / 10;
-            document.getElementById('total-grasas').textContent = Math.round(totalGrasas * 10) / 10;
-        }
-
-        function actualizarDashboard() {
-            const hoy = new Date().toISOString().split('T')[0];
-            const semana = obtenerFechasSemana();
-            
-            // Minutos esta semana
-            const minutosSemanales = entrenamientos
-                .filter(ent => semana.includes(ent.fecha))
-                .reduce((sum, ent) => sum + ent.duracion, 0);
-            
-            // Entrenamientos completados
-            const entrenamientosCompletados = entrenamientos.length;
-            
-            // Calorías quemadas hoy
-            const caloriasHoy = entrenamientos
-                .filter(ent => ent.fecha === hoy)
-                .reduce((sum, ent) => sum + (ent.calorias || 0), 0);
-            
-            // Racha de días
-            const racha = calcularRacha();
-
-            document.getElementById('dashboard-total-minutos').textContent = minutosSemanales;
-            document.getElementById('dashboard-entrenamientos').textContent = entrenamientosCompletados;
-            document.getElementById('dashboard-calorias').textContent = caloriasHoy;
-            document.getElementById('dashboard-racha').textContent = racha;
-        }
-
-        function actualizarObjetivosDiarios() {
-            const hoy = new Date().toISOString().split('T')[0];
-            
-            // Minutos de ejercicio hoy
-            const minutosHoy = entrenamientos
-                .filter(ent => ent.fecha === hoy)
-                .reduce((sum, ent) => sum + ent.duracion, 0);
-            
-            // Calorías quemadas hoy
-            const caloriasHoy = entrenamientos
-                .filter(ent => ent.fecha === hoy)
-                .reduce((sum, ent) => sum + (ent.calorias || 0), 0);
-
-            // Actualizar círculos de progreso
-            actualizarCirculoProgreso('ejercicio', minutosHoy, objetivos.ejercicio, 'min');
-            actualizarCirculoProgreso('calorias', caloriasHoy, objetivos.calorias, 'kcal');
-            actualizarCirculoProgreso('agua', vasosAgua, objetivos.agua, 'vasos');
-        }
-
-        function actualizarCirculoProgreso(tipo, actual, meta, unidad) {
-            const porcentaje = Math.min((actual / meta) * 100, 100);
-            const circumference = 100;
-            const offset = circumference - (porcentaje / 100) * circumference;
-
-            document.getElementById(`progreso-${tipo}`).style.strokeDasharray = `${circumference}, ${circumference}`;
-            document.getElementById(`progreso-${tipo}`).style.strokeDashoffset = offset;
-            document.getElementById(`porcentaje-${tipo}`).textContent = `${Math.round(porcentaje)}%`;
-            document.getElementById(`meta-${tipo}`).textContent = `${actual}/${meta} ${unidad}`;
-        }
-
-        function actualizarActividadReciente() {
-            const actividadContainer = document.getElementById('actividad-reciente');
-            const actividades = [...entrenamientos, ...comidas]
-                .sort((a, b) => new Date(b.fechaCreacion || b.fecha) - new Date(a.fechaCreacion || a.fecha))
-                .slice(0, 5);
-
-            if (actividades.length === 0) {
-                actividadContainer.innerHTML = `
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p>Sin actividad reciente</p>
-                    </div>
-                `;
+        function iniciarTimer() {
+            if (timerSegundos <= 0) {
+                alert('Configura un tiempo primero');
                 return;
             }
 
-            actividadContainer.innerHTML = actividades.map(actividad => {
-                const esEntrenamiento = actividad.duracion !== undefined;
-                const icono = esEntrenamiento ? '💪' : '🍽️';
-                const tiempo = esEntrenamiento ? `${actividad.duracion} min` : `${actividad.calorias} kcal`;
-                
-                return `
-                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                        <span class="text-2xl mr-3">${icono}</span>
-                        <div class="flex-1">
-                            <p class="font-medium text-gray-800">${actividad.nombre}</p>
-                            <p class="text-sm text-gray-500">${tiempo} • ${formatearFecha(actividad.fecha)}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Funciones de utilidad
-        function obtenerFechasSemana() {
-            const hoy = new Date();
-            const diasSemana = [];
-            
-            for (let i = 6; i >= 0; i--) {
-                const fecha = new Date(hoy);
-                fecha.setDate(hoy.getDate() - i);
-                diasSemana.push(fecha.toISOString().split('T')[0]);
+            if (timerPausado) {
+                timerPausado = false;
             }
-            
-            return diasSemana;
+
+            document.getElementById('btn-iniciar').classList.add('hidden');
+            document.getElementById('btn-pausar').classList.remove('hidden');
+            document.getElementById('timer-status').textContent = 'En progreso...';
+
+            timerInterval = setInterval(() => {
+                if (!timerPausado) {
+                    timerSegundos--;
+                    actualizarDisplayTimer();
+                    actualizarProgresoTimer();
+
+                    if (timerSegundos <= 0) {
+                        clearInterval(timerInterval);
+                        document.getElementById('btn-iniciar').classList.remove('hidden');
+                        document.getElementById('btn-pausar').classList.add('hidden');
+                        document.getElementById('timer-status').textContent = '¡Completado!';
+                        mostrarMensaje('¡Timer completado! 🎉', 'success');
+                    }
+                }
+            }, 1000);
         }
 
-        function calcularRacha() {
-            if (entrenamientos.length === 0) return 0;
-            
-            const fechasUnicas = [...new Set(entrenamientos.map(ent => ent.fecha))].sort().reverse();
-            let racha = 0;
-            let fechaActual = new Date().toISOString().split('T')[0];
-            
-            for (const fecha of fechasUnicas) {
-                if (fecha === fechaActual) {
-                    racha++;
-                    const fechaObj = new Date(fechaActual);
-                    fechaObj.setDate(fechaObj.getDate() - 1);
-                    fechaActual = fechaObj.toISOString().split('T')[0];
-                } else {
-                    break;
+        function pausarTimer() {
+            timerPausado = true;
+            document.getElementById('btn-iniciar').classList.remove('hidden');
+            document.getElementById('btn-pausar').classList.add('hidden');
+            document.getElementById('timer-status').textContent = 'Pausado';
+        }
+
+        function detenerTimer() {
+            clearInterval(timerInterval);
+            timerSegundos = 0;
+            timerDuracion = 0;
+            timerPausado = false;
+            document.getElementById('btn-iniciar').classList.remove('hidden');
+            document.getElementById('btn-pausar').classList.add('hidden');
+            document.getElementById('timer-status').textContent = 'Listo';
+            actualizarDisplayTimer();
+            actualizarProgresoTimer();
+        }
+
+        function actualizarDisplayTimer() {
+            const minutos = Math.floor(timerSegundos / 60);
+            const segundos = timerSegundos % 60;
+            document.getElementById('timer-display').textContent = 
+                `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        }
+
+        function actualizarProgresoTimer() {
+            if (timerDuracion > 0) {
+                const progreso = (timerDuracion - timerSegundos) / timerDuracion;
+                const grados = progreso * 360;
+                document.getElementById('timer-progress').style.transform = `rotate(${grados}deg)`;
+            }
+        }
+
+        // Función para agregar vaso de agua
+        function agregarVaso() {
+            vasosAgua++;
+            document.getElementById('vasos-agua').textContent = vasosAgua;
+            mostrarMensaje(`¡Vaso ${vasosAgua} registrado! 💧`, 'success');
+        }
+
+        // Función para actualizar estadísticas
+        function actualizarEstadisticas() {
+            const totalMinutos = entrenamientos.reduce((sum, ent) => sum + ent.duracion, 0);
+            const totalEntrenamientos = entrenamientos.length;
+            const totalCalorias = entrenamientos.reduce((sum, ent) => sum + ent.calorias, 0);
+            const promedio = totalEntrenamientos > 0 ? Math.round(totalMinutos / totalEntrenamientos) : 0;
+
+            // Actualizar estadísticas de entrenamientos
+            document.getElementById('stat-minutos').textContent = totalMinutos;
+            document.getElementById('stat-entrenamientos').textContent = totalEntrenamientos;
+            document.getElementById('stat-calorias').textContent = totalCalorias;
+            document.getElementById('stat-promedio').textContent = promedio;
+
+            // Actualizar estadísticas nutricionales
+            const hoy = new Date().toISOString().split('T')[0];
+            const comidasHoy = comidas.filter(comida => comida.fecha === hoy);
+            const caloriasConsumidas = comidasHoy.reduce((sum, comida) => sum + comida.calorias, 0);
+            const balanceCalorico = totalCalorias - caloriasConsumidas;
+
+            document.getElementById('total-calorias-consumidas').textContent = caloriasConsumidas;
+            document.getElementById('balance-calorico').textContent = balanceCalorico;
+            document.getElementById('total-comidas-hoy').textContent = comidasHoy.length;
+        }
+
+        // Funciones auxiliares
+        function limpiarFormulario() {
+            document.getElementById('nombre').value = '';
+            document.getElementById('duracion').value = '';
+            document.getElementById('calorias').value = '';
+            document.getElementById('intensidad').value = '';
+            document.getElementById('tipo').value = '';
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').value = hoy;
+        }
+
+        function limpiarFormularioComida() {
+            document.getElementById('alimento').value = '';
+            document.getElementById('calorias-comida').value = '';
+            document.getElementById('porcion').value = '';
+            document.getElementById('tipo-comida').value = '';
+        }
+
+        function formatearFecha(fechaStr) {
+            const fecha = new Date(fechaStr + 'T00:00:00');
+            return fecha.toLocaleDateString('es-ES', { 
+                day: 'numeric', 
+                month: 'short' 
+            });
+        }
+
+        function mostrarMensaje(mensaje, tipo) {
+            const colores = {
+                'success': 'bg-green-500',
+                'error': 'bg-red-500',
+                'info': 'bg-blue-500'
+            };
+
+            const div = document.createElement('div');
+            div.className = `fixed top-4 right-4 ${colores[tipo] || 'bg-gray-500'} text-white px-4 py-2 rounded-lg shadow-lg z-50`;
+            div.textContent = mensaje;
+            div.style.animation = 'fadeIn 0.5s ease-in';
+
+            document.body.appendChild(div);
+
+            setTimeout(() => {
+                div.style.opacity = '0';
+                div.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    if (div.parentNode) {
+                        div.parentNode.removeChild(div);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners para Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const target = e.target;
+                if (target.closest('#seccion-entrenamientos')) {
+                    agregarEntrenamiento();
+                } else if (target.closest('#seccion-nutricion')) {
+                    agregarComida();
                 }
             }
+        });
+
+        // Datos de ejemplo
+        setTimeout(() => {
+            if (entrenamientos.length === 0) {
+                const cargarEjemplo = confirm('¿Quieres cargar algunos datos de ejemplo?');
+                if (cargarEjemplo) {
+                    // Agregar entrenamientos de ejemplo
+                    entrenamientos.push(
+                        {
+                            id: contadorId++,
+                            nombre: 'Cardio matutino',
+                            duracion: 30,
+                            calorias: 200,
+                            fecha: new Date().toISOString().split('T')[0],
+                            intensidad: 'media',
+                            tipo: 'cardio'
+                        },
+                        {
+                            id: contadorId++,
+                            nombre: 'Fuerza en el gym',
+                            duracion: 45,
+                            calorias: 180,
+                            fecha: new Date(Date.now() - 86400000).toISOString().split('T')[0],
+                            intensidad: 'alta',
+                            tipo: 'fuerza'
+                        }
+                    );
+
+                    // Agregar comidas de ejemplo
+                    comidas.push(
+                        {
+                            id: contadorComidas++,
+                            nombre: 'Desayuno saludable',
+                            calorias: 300,
+                            porcion: 250,
+                            tipo: 'desayuno',
+                            fecha: new Date().toISOString().split('T')[0],
+                            hora: '08:00'
+                        },
+                        {
+                            id: contadorComidas++,
+                            nombre: 'Almuerzo balanceado',
+                            calorias: 450,
+                            porcion: 350,
+                            tipo: 'almuerzo',
+                            fecha: new Date().toISOString().split('T')[0],
+                            hora: '13:30'
+                        }
+                    );
+
+                    vasosAgua = 4;
+                    document.getElementById('vasos-agua').textContent = vasosAgua;
+
+                    renderizarEntrenamientos();
+                    renderizarComidas();
+                    actualizarEstadisticas();
+                    mostrarMensaje('¡Datos de ejemplo cargados!', 'success');
+                }
+            }
+        }, 2000);
+
+        console.log('🏃‍♂️ FitTracker cargado correctamente!');
+        console.log('💡 Tip: Usa Enter para enviar formularios rápidamente');
+    </script>
+</body>
+</html>
